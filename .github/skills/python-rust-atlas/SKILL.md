@@ -38,3 +38,9 @@ know?"
 - Do not hide errors with `unwrap()` unless a crash is intentional.
 - Do not ignore ownership or async task boundaries just to preserve Python
   shape.
+
+## Extended references
+
+- Read `references/decision-guide.md` when the user needs a migration path or sequence.
+- Read `references/worked-example.md` when a concrete example would help.
+- Read `references/review-checklist.md` when reviewing an implementation or plan.
