@@ -1,0 +1,4 @@
+interface:
+  display_name: "Python to Rust Atlas"
+  short_description: "Map Python ideas into idiomatic Rust"
+  default_prompt: "Use $python-rust-atlas to translate a Python pattern into idiomatic Rust and explain the mental model shift."

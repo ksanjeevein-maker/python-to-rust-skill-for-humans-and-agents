@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Python to Rust Atlas</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%2317202c'/%3E%3Cpath d='M9 22V10h4.5c3.1 0 4.9 1.6 4.9 4.1S16.6 18 13.5 18H12v4H9Z' fill='%23f4efe7'/%3E%3Cpath d='M20 10h3l-5 12h-3l5-12Z' fill='%23b1542e'/%3E%3C/svg%3E"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="paper-glow paper-glow-a" aria-hidden="true"></div>
+    <div class="paper-glow paper-glow-b" aria-hidden="true"></div>
+
+    <main class="page-shell">
+      <header class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">Migration reference app</p>
+          <h1>Python to Rust Atlas</h1>
+          <p class="hero-text">
+            A local-first guide for Python developers moving into Rust without
+            losing the plot. Search concepts, compare code, and learn the
+            mental shifts that matter before the borrow checker teaches them the
+            hard way.
+          </p>
+          <div class="hero-pills">
+            <span class="pill">Concept browser</span>
+            <span class="pill">Code translations</span>
+            <span class="pill">Mental model notes</span>
+          </div>
+        </div>
+
+        <aside class="hero-card">
+          <p class="eyebrow">First route</p>
+          <div class="route-list">
+            <article class="route-card">
+              <span class="route-step">1</span>
+              <div>
+                <h2>Mutability and ownership</h2>
+                <p>Understand why "just reassign it" stops being free.</p>
+              </div>
+            </article>
+            <article class="route-card">
+              <span class="route-step">2</span>
+              <div>
+                <h2>Option and Result</h2>
+                <p>Swap Python's runtime surprises for explicit paths.</p>
+              </div>
+            </article>
+            <article class="route-card">
+              <span class="route-step">3</span>
+              <div>
+                <h2>Iterators and structs</h2>
+                <p>Learn the Rust shape of data modeling and collection work.</p>
+              </div>
+            </article>
+          </div>
+        </aside>
+      </header>
+
+      <section class="stats-row" aria-label="Quick stats">
+        <article class="stat-card">
+          <p class="stat-label">Reference patterns</p>
+          <strong id="stat-count">0</strong>
+        </article>
+        <article class="stat-card">
+          <p class="stat-label">Active category</p>
+          <strong id="stat-category">All</strong>
+        </article>
+        <article class="stat-card">
+          <p class="stat-label">Selected concept</p>
+          <strong id="stat-selected">Ownership</strong>
+        </article>
+      </section>
+
+      <section class="studio-grid">
+        <aside class="panel library-panel">
+          <div class="panel-heading">
+            <div>
+              <p class="eyebrow">Library</p>
+              <h2>Find the translation</h2>
+            </div>
+            <p id="results-count" class="results-count"></p>
+          </div>
+
+          <label class="search-field">
+            Search
+            <input
+              id="search-input"
+              type="search"
+              placeholder="Try: exceptions, dict, async, ownership"
+            />
+          </label>
+
+          <div id="category-chips" class="category-chips" aria-label="Categories"></div>
+          <div id="concept-list" class="concept-list"></div>
+        </aside>
+
+        <section class="panel detail-panel">
+          <div class="detail-topline">
+            <div>
+              <p id="detail-category" class="detail-category"></p>
+              <h2 id="detail-title"></h2>
+            </div>
+            <span id="detail-level" class="pill"></span>
+          </div>
+
+          <p id="detail-summary" class="detail-summary"></p>
+
+          <div class="tab-row" role="tablist" aria-label="Detail views">
+            <button class="detail-tab is-active" data-detail-tab="code" type="button">
+              Code map
+            </button>
+            <button class="detail-tab" data-detail-tab="mindset" type="button">
+              Mental shift
+            </button>
+            <button class="detail-tab" data-detail-tab="recipes" type="button">
+              Recipes
+            </button>
+          </div>
+
+          <section class="detail-panel-body detail-tab-panel is-active" data-detail-panel="code">
+            <div class="code-grid">
+              <article class="code-card">
+                <div class="code-card-top">
+                  <p class="code-label">Python</p>
+                  <button class="ghost-button copy-button" data-copy-target="python-code" type="button">
+                    Copy
+                  </button>
+                </div>
+                <pre id="python-code" class="code-block"></pre>
+              </article>
+
+              <article class="code-card">
+                <div class="code-card-top">
+                  <p class="code-label">Rust</p>
+                  <button class="ghost-button copy-button" data-copy-target="rust-code" type="button">
+                    Copy
+                  </button>
+                </div>
+                <pre id="rust-code" class="code-block"></pre>
+              </article>
+            </div>
+
+            <div class="note-grid">
+              <article class="note-card">
+                <p class="note-label">Translation checklist</p>
+                <ul id="translation-checklist" class="bullet-list"></ul>
+              </article>
+              <article class="note-card">
+                <p class="note-label">Tooling and crates</p>
+                <ul id="crate-notes" class="bullet-list"></ul>
+              </article>
+            </div>
+          </section>
+
+          <section class="detail-panel-body detail-tab-panel" data-detail-panel="mindset">
+            <div class="mindset-grid">
+              <article class="note-card mindset-main">
+                <p class="note-label">Mental shift</p>
+                <p id="mental-shift" class="mindset-copy"></p>
+              </article>
+              <article class="note-card">
+                <p class="note-label">Habit to drop</p>
+                <p id="habit-drop" class="mindset-copy"></p>
+              </article>
+              <article class="note-card">
+                <p class="note-label">Habit to build</p>
+                <p id="habit-build" class="mindset-copy"></p>
+              </article>
+              <article class="note-card">
+                <p class="note-label">Watchouts</p>
+                <ul id="watchouts" class="bullet-list"></ul>
+              </article>
+            </div>
+          </section>
+
+          <section class="detail-panel-body detail-tab-panel" data-detail-panel="recipes">
+            <div id="recipe-grid" class="recipe-grid"></div>
+          </section>
+
+          <section class="reference-shelf" aria-labelledby="reference-shelf-title">
+            <div class="reference-shelf-top">
+              <div>
+                <p class="eyebrow">Reference shelf</p>
+                <h3 id="reference-shelf-title">Official docs and source repos</h3>
+              </div>
+              <p id="detail-reference-count" class="results-count"></p>
+            </div>
+
+            <div class="reference-grid">
+              <article class="reference-card">
+                <p class="note-label">For this concept</p>
+                <div id="detail-reference-list" class="reference-list"></div>
+              </article>
+              <article class="reference-card">
+                <p class="note-label">Keep nearby</p>
+                <div id="shared-reference-list" class="reference-list"></div>
+              </article>
+            </div>
+          </section>
+        </section>
+      </section>
+    </main>
+
+    <template id="concept-card-template">
+      <button class="concept-card" type="button">
+        <div class="concept-card-top">
+          <p class="concept-category"></p>
+          <span class="concept-level"></span>
+        </div>
+        <h3 class="concept-title"></h3>
+        <p class="concept-summary"></p>
+        <div class="concept-keywords"></div>
+      </button>
+    </template>
+
+    <template id="recipe-template">
+      <article class="recipe-card">
+        <div class="recipe-top">
+          <h3 class="recipe-title"></h3>
+          <span class="pill recipe-pill">Pattern</span>
+        </div>
+        <p class="recipe-summary"></p>
+        <div class="recipe-code-grid">
+          <article class="mini-code-card">
+            <p class="code-label">Python</p>
+            <pre class="mini-code recipe-python"></pre>
+          </article>
+          <article class="mini-code-card">
+            <p class="code-label">Rust</p>
+            <pre class="mini-code recipe-rust"></pre>
+          </article>
+        </div>
+      </article>
+    </template>
+
+    <script src="./app.js"></script>
+  </body>
+</html>

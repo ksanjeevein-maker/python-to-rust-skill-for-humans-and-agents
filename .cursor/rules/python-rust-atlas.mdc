@@ -1,0 +1,21 @@
+---
+description: Use Python to Rust Atlas when translating Python ideas into idiomatic Rust or explaining the migration mental model.
+alwaysApply: false
+---
+
+# Python to Rust Atlas
+
+Use this rule for Python-to-Rust migration questions, reference lookups, and
+side-by-side code rewrites.
+
+- Read `AGENTS.md` for the main workflow.
+- Use `.github/skills/python-rust-atlas/references/concepts.md` for conceptual
+  mapping.
+- Use `.github/skills/python-rust-atlas/references/patterns.md` for code
+  rewrites.
+- Use `.github/skills/python-rust-atlas/references/official-links.md` or
+  `official-references.md` when citations are needed.
+- Explain the Rust mental model first, then show code.
+- Prefer idiomatic Rust over Python-like transliterations.
+- Call out ownership, borrowing, `Option`/`Result`, and async runtime tradeoffs
+  when they matter.
